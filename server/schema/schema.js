@@ -1,25 +1,28 @@
 const graphql = require("graphql");
+const Figure = require("../db/models/figure");
+const Position = require("../db/models/position");
 
 const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLSchema,
   GraphQLList,
+  GraphQLID,
 } = graphql;
 
 const FigureType = new GraphQLObjectType({
   name: "Figure",
   fields: () => ({
-    id: { type: GraphQLString },
+    id: { type: GraphQLID },
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     difficulty: { type: GraphQLString },
     number: { type: GraphQLString },
     positions: {
       type: new GraphQLList(PositionType),
-    },
-    transitions: {
-      type: new GraphQLList(TransitionType),
+      resolve(parent, args) {
+        return Position.find({ figure: parent.id });
+      },
     },
   }),
 });
@@ -27,20 +30,14 @@ const FigureType = new GraphQLObjectType({
 const PositionType = new GraphQLObjectType({
   name: "Position",
   fields: () => ({
-    id: { type: GraphQLString },
+    id: { type: GraphQLID },
     name: { type: GraphQLString },
     description: { type: GraphQLString },
-  }),
-});
-
-const TransitionType = new GraphQLObjectType({
-  name: "Transition",
-  fields: () => ({
-    id: { type: GraphQLString },
-    name: { type: GraphQLString },
-    description: { type: GraphQLString },
-    positions: {
-      type: new GraphQLList(PositionType),
+    figure: {
+      type: FigureType,
+      resolve(parent, args) {
+        return Figure.findById(parent.figure);
+      },
     },
   }),
 });
@@ -52,22 +49,23 @@ const RootQuery = new GraphQLObjectType({
       type: FigureType,
       args: { id: { type: GraphQLString } },
       resolve(parent, args) {
-        //code to get figure data from database
+        return Figure.findById(args.id);
       },
+    },
+    figures: {
+      type: new GraphQLList(FigureType),
+      resolve: () => Figure.find({}),
     },
     position: {
       type: PositionType,
       args: { id: { type: GraphQLString } },
       resolve(parent, args) {
-        //code to get position data from database
+        return Position.findById(args.id);
       },
     },
-    transition: {
-      type: TransitionType,
-      args: { id: { type: GraphQLString } },
-      resolve(parent, args) {
-        //code to get transition data from database
-      },
+    positions: {
+      type: new GraphQLList(PositionType),
+      resolve: () => Position.find({}),
     },
   },
 });
