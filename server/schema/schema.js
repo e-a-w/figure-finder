@@ -21,7 +21,7 @@ const FigureType = new GraphQLObjectType({
     positions: {
       type: new GraphQLList(PositionType),
       resolve(parent, args) {
-        return Position.find({ figure: parent.id });
+        return Position.find({ figures: parent.id });
       },
     },
   }),
@@ -33,10 +33,10 @@ const PositionType = new GraphQLObjectType({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     description: { type: GraphQLString },
-    figure: {
-      type: FigureType,
+    figures: {
+      type: new GraphQLList(FigureType),
       resolve(parent, args) {
-        return Figure.findById(parent.figure);
+        return Figure.find({ positions: parent.id });
       },
     },
   }),

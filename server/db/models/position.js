@@ -9,7 +9,7 @@ const positionSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  figure: { type: String },
+  figures: [{ type: mongoose.Schema.Types.ObjectId, ref: "Figure" }],
 });
 
 const Position = mongoose.model("Position", positionSchema);
