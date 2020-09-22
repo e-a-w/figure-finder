@@ -1,23 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Position from "../components/Position";
 import { Card, CardContent, Typography } from "@material-ui/core";
 
-const PositionPage = () => {
+const PositionPage = ({ match }) => {
+  const { id } = match.params;
+  const [isAll, setIsAll] = useState(false);
+
+  useEffect(() => {
+    if (id) {
+      setIsAll(false);
+    } else {
+      setIsAll(true);
+    }
+  }, [id]);
+
   return (
     <>
       <Typography variant="h2" style={{ padding: "20px" }}>
-        Position
+        Position{isAll && "s"}:
       </Typography>
-      <Card elevation={3}>
-        <CardContent>
-          <Typography variant="h5" gutterBottom>
-            Surface Arch Position:
-          </Typography>
-          <Typography variant="body1">
-            The lower back is arched so the hips, shoulders and head are on a
-            vertical line. The legs are together and at the surface.
-          </Typography>
-        </CardContent>
-      </Card>
+      <Position isAll={isAll} />
       <div
         style={{
           marginTop: "50px",

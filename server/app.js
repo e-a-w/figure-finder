@@ -1,6 +1,7 @@
 require("./db/config");
 const express = require("express"),
   path = require("path"),
+  cors = require("cors"),
   app = express();
 
 // GraphQL
@@ -8,6 +9,7 @@ const { graphqlHTTP } = require("express-graphql"),
   schema = require("./schema/schema");
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 
 // Routes

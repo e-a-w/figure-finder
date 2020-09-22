@@ -7,22 +7,32 @@ import Navigation from "./pages/Navigation";
 import SearchPage from "./pages/SearchPage";
 import TransitionPage from "./pages/TransitionPage";
 import PositionPage from "./pages/PositionPage";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: "http://localhost:8080/graphql",
+  cache: new InMemoryCache(),
+});
 
 function App() {
   return (
-    <Router>
-      <CssBaseline />
-      <Navigation />
-      <div id="app-container">
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/figure" component={FigurePage} />
-          <Route exact path="/position" component={PositionPage} />
-          <Route exact path="/transition" component={TransitionPage} />
-          <Route exact path="/search" component={SearchPage} />
-        </Switch>
-      </div>
-    </Router>
+    <ApolloProvider client={client}>
+      <Router>
+        <CssBaseline />
+        <Navigation />
+        <div id="app-container">
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/figures" component={FigurePage} />
+            <Route exact path="/figure/:id" component={FigurePage} />
+            <Route exact path="/positions" component={PositionPage} />
+            <Route exact path="/position/:id" component={PositionPage} />
+            <Route exact path="/transition" component={TransitionPage} />
+            <Route exact path="/search" component={SearchPage} />
+          </Switch>
+        </div>
+      </Router>
+    </ApolloProvider>
   );
 }
 
