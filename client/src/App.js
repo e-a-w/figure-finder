@@ -24,10 +24,10 @@ function App() {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/figures" component={FigurePage} />
-            <Route exact path="/figure/:id" component={FigurePage} />
+            <Route exact path="/figures/:id" component={FigurePage} />
             <Route exact path="/positions" component={PositionPage} />
-            <Route exact path="/position/:id" component={PositionPage} />
-            <Route exact path="/transition" component={TransitionPage} />
+            <Route exact path="/positions/:id" component={PositionPage} />
+            <Route exact path="/transitions" component={TransitionPage} />
             <Route exact path="/search" component={SearchPage} />
           </Switch>
         </div>

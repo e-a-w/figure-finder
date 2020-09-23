@@ -1,5 +1,4 @@
 import React from "react";
-import Related from "./Related";
 import { gql, useQuery } from "@apollo/client";
 import reactStringReplace from "react-string-replace";
 import { Link } from "react-router-dom";
@@ -10,7 +9,7 @@ import {
   Link as MaterialLink,
 } from "@material-ui/core";
 
-const Figure = ({ figureId }) => {
+const Figure = () => {
   const formatPositions = (obj) => {
     for (let i = 0; i < obj.positions.length; i++) {
       obj.description = reactStringReplace(
@@ -31,9 +30,9 @@ const Figure = ({ figureId }) => {
     return obj.description;
   };
 
-  const GET_FIGURE = gql`
-    query($id: ID!) {
-      figure(id: $id) {
+  const GET_FIGURES = gql`
+    query {
+      figures {
         id
         name
         number
@@ -42,15 +41,12 @@ const Figure = ({ figureId }) => {
         positions {
           id
           name
-          description
         }
       }
     }
   `;
 
-  const { data, loading, error } = useQuery(GET_FIGURE, {
-    variables: { id: figureId },
-  });
+  const { data, loading, error } = useQuery(GET_FIGURES);
 
   if (loading) return <p>LOADING</p>;
   if (error) return <p>ERROR</p>;
@@ -58,29 +54,33 @@ const Figure = ({ figureId }) => {
 
   return (
     <>
-      {data.figure && (
-        <>
+      {data?.figures?.map((figure) => {
+        return (
           <Card
-            key={data.figure.id}
+            key={figure.id}
             elevation={3}
-            style={{ margin: "20px auto" }}
+            style={{ margin: "20px auto", width: "100%" }}
           >
             <CardContent>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Typography variant="h5" gutterBottom>
-                  {data.figure.number}&nbsp;{data.figure.name}
+                <Typography
+                  component={MaterialLink}
+                  href={`/figures/${figure.id}`}
+                  variant="h5"
+                  gutterBottom
+                >
+                  {figure.number}&nbsp;{figure.name}
                 </Typography>
                 <Typography variant="body1" gutterBottom>
-                  Difficulty {data.figure.difficulty}
+                  Difficulty {figure.difficulty}
                 </Typography>
               </div>
-              {/* <Typography variant="body1">{formatPositions(data.figure)}</Typography> */}
-              <Typography variant="body1">{data.figure.description}</Typography>
+              {/* <Typography variant="body1">{formatPositions(figure)}</Typography> */}
+              <Typography variant="body1">{figure.description}</Typography>
             </CardContent>
           </Card>
-          <Related positions={data.figure.positions} />
-        </>
-      )}
+        );
+      })}
     </>
   );
 };

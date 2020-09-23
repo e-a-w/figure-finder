@@ -47,7 +47,7 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     figure: {
       type: FigureType,
-      args: { id: { type: GraphQLString } },
+      args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return Figure.findById(args.id);
       },
@@ -58,7 +58,7 @@ const RootQuery = new GraphQLObjectType({
     },
     position: {
       type: PositionType,
-      args: { id: { type: GraphQLString } },
+      args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return Position.findById(args.id);
       },

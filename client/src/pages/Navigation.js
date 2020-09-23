@@ -97,11 +97,11 @@ const Navigation = () => {
         return <HomeSharpIcon />;
       case "Search":
         return <SearchIcon />;
-      case "Figure":
+      case "All Figures":
         return <PoolSharpIcon />;
-      case "Position":
+      case "All Positions":
         return <PoolSharpIcon />;
-      case "Transition":
+      case "All Transitions":
         return <PoolSharpIcon />;
       default:
         return null;
@@ -121,16 +121,14 @@ const Navigation = () => {
           {[
             { text: "Home", link: "/" },
             { text: "Search", link: "/search" },
-            { text: "Figure", link: "/figure" },
-            { text: "Position", link: "/position" },
-            { text: "Transition", link: "/transition" },
+            { text: "All Figures", link: "/figures" },
+            { text: "All Positions", link: "/positions" },
+            { text: "All Transitions", link: "/transitions" },
           ].map((el) => (
-            // <Link key={el.text} to={el.link}>
             <ListItem component={Link} to={el.link} button key={el.text}>
               <ListItemIcon>{iconList(el.text)}</ListItemIcon>
               <ListItemText primary={el.text} />
             </ListItem>
-            // </Link>
           ))}
         </List>
       </div>
