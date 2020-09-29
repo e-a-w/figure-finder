@@ -1,7 +1,6 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import reactStringReplace from "react-string-replace";
-import { Link } from "react-router-dom";
+import FormattedFigure from "../components/FormattedFigure";
 import {
   Card,
   CardContent,
@@ -10,26 +9,6 @@ import {
 } from "@material-ui/core";
 
 const Figure = () => {
-  const formatPositions = (obj) => {
-    for (let i = 0; i < obj.positions.length; i++) {
-      obj.description = reactStringReplace(
-        obj.description,
-        obj.positions[i],
-        (match, i) => (
-          <MaterialLink
-            key={i}
-            component={Link}
-            to="/"
-            style={{ fontWeight: "bold" }}
-          >
-            {match}
-          </MaterialLink>
-        )
-      );
-    }
-    return obj.description;
-  };
-
   const GET_FIGURES = gql`
     query {
       figures {
@@ -75,8 +54,7 @@ const Figure = () => {
                   Difficulty {figure.difficulty}
                 </Typography>
               </div>
-              {/* <Typography variant="body1">{formatPositions(figure)}</Typography> */}
-              <Typography variant="body1">{figure.description}</Typography>
+              <FormattedFigure figure={figure} />
             </CardContent>
           </Card>
         );
