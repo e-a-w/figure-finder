@@ -1,3 +1,4 @@
+const { ResultStorage } = require("firebase-functions/lib/providers/testLab");
 const graphql = require("graphql");
 const Figure = require("../db/models/figure");
 const Position = require("../db/models/position");
@@ -56,6 +57,27 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(FigureType),
       resolve: () => Figure.find({}),
     },
+    filterFigures: {
+      type: new GraphQLList(FigureType),
+      args: {
+        name: { type: GraphQLString },
+        description: { type: GraphQLString },
+        difficulty: { type: GraphQLString },
+        number: { type: GraphQLString },
+        position: { type: PositionType },
+      },
+      resolve: (parent, args) => {
+        const results = Figure.find({
+          $or: [
+            { name: { $regex: `${args.name}`, $options: "i" } },
+            { description: { $regex: `${args.description}`, $options: "i" } },
+            { difficulty: { $regex: `${args.difficulty}`, $options: "i" } },
+            { number: { $regex: `${args.number}`, $options: "i" } },
+          ],
+        });
+        return results;
+      },
+    },
     position: {
       type: PositionType,
       args: { id: { type: GraphQLID } },
@@ -66,6 +88,24 @@ const RootQuery = new GraphQLObjectType({
     positions: {
       type: new GraphQLList(PositionType),
       resolve: () => Position.find({}),
+    },
+    filterPositions: {
+      type: new GraphQLList(PositionType),
+      args: {
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        description: { type: GraphQLString },
+        figure: { type: FigureType },
+      },
+      resolve: (parent, args) => {
+        const results = Position.find({
+          $or: [
+            { name: { $regex: `${args.name}`, $options: "i" } },
+            { description: { $regex: `${args.description}`, $options: "i" } },
+          ],
+        });
+        return results;
+      },
     },
   },
 });
