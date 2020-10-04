@@ -1,5 +1,6 @@
 import React from "react";
-import { Typography, Link, TextField } from "@material-ui/core";
+import HomeSearchBox from "../components/HomeSearchBox";
+import { Typography, Link } from "@material-ui/core";
 
 const HomePage = () => {
   return (
@@ -27,21 +28,7 @@ const HomePage = () => {
         &nbsp;and is not affiliated with or endorsed by USA Artistic Swimming or
         any other official source.
       </Typography>
-      <div>
-        <form autoComplete="off">
-          <TextField
-            id="home-searchbox"
-            label="Search"
-            name="search"
-            variant="outlined"
-            style={{
-              background: "white",
-              width: "100%",
-              margin: "20px auto",
-            }}
-          />
-        </form>
-      </div>
+      <HomeSearchBox />
     </div>
   );
 };

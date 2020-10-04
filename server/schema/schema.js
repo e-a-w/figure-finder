@@ -64,10 +64,9 @@ const RootQuery = new GraphQLObjectType({
         description: { type: GraphQLString },
         difficulty: { type: GraphQLString },
         number: { type: GraphQLString },
-        position: { type: PositionType },
       },
       resolve: (parent, args) => {
-        const results = Figure.find({
+        return Figure.find({
           $or: [
             { name: { $regex: `${args.name}`, $options: "i" } },
             { description: { $regex: `${args.description}`, $options: "i" } },
@@ -75,7 +74,6 @@ const RootQuery = new GraphQLObjectType({
             { number: { $regex: `${args.number}`, $options: "i" } },
           ],
         });
-        return results;
       },
     },
     position: {
@@ -95,16 +93,14 @@ const RootQuery = new GraphQLObjectType({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         description: { type: GraphQLString },
-        figure: { type: FigureType },
       },
       resolve: (parent, args) => {
-        const results = Position.find({
+        return Position.find({
           $or: [
             { name: { $regex: `${args.name}`, $options: "i" } },
             { description: { $regex: `${args.description}`, $options: "i" } },
           ],
         });
-        return results;
       },
     },
   },
