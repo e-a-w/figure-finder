@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AppContext } from "../context/AppContext";
 import {
   Card,
   CardContent,
@@ -8,9 +9,20 @@ import {
 import FormattedFigure from "./FormattedFigure";
 
 const Results = ({ figures, format }) => {
+  const { results } = useContext(AppContext);
+  const [figs, setFigs] = useState([]);
+
+  useEffect(() => {
+    if (figures) {
+      setFigs(figures);
+    } else if (results) {
+      setFigs(results);
+    }
+  }, [results, figures]);
+
   return (
     <>
-      {figures?.map((figure) => {
+      {figs?.map((figure) => {
         return (
           <Card
             key={figure.id}

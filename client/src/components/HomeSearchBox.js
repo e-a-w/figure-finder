@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext";
 import { TextField, Button } from "@material-ui/core";
 import { gql, useLazyQuery } from "@apollo/client";
 import Results from "./Results";
 
 const HomeSearchBox = () => {
-  const { searchTerm, setSearchTerm } = useContext(AppContext);
+  const { searchTerm, setSearchTerm, setResults, results } = useContext(
+    AppContext
+  );
 
   const SEARCH_FIGURES = gql`
     query($name: String!) {
@@ -21,10 +23,12 @@ const HomeSearchBox = () => {
 
   const [getSearch, { data, loading, error }] = useLazyQuery(SEARCH_FIGURES);
 
+  useEffect(() => {
+    setResults(data?.filterFigures);
+  }, [data, results]);
+
   if (loading) return <p>LOADING</p>;
   if (error) return <p>ERROR</p>;
-
-  console.log(data);
 
   return (
     <>
@@ -60,7 +64,7 @@ const HomeSearchBox = () => {
         </form>
       </div>
       <div>
-        <Results figures={data?.filterFigures} />
+        <Results figures={results && results} />
       </div>
     </>
   );

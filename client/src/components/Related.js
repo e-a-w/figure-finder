@@ -25,7 +25,7 @@ const RelatedPositionTransition = ({ figures, positions }) => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "auto auto",
+          gridTemplateColumns: "auto",
           gap: "50px",
         }}
       >
@@ -61,7 +61,7 @@ const RelatedPositionTransition = ({ figures, positions }) => {
               );
             })}
         </div>
-        <div id="col-right">
+        {/* <div id="col-right">
           <Typography
             variant="h4"
             style={{ padding: "20px", textAlign: "center" }}
@@ -76,7 +76,7 @@ const RelatedPositionTransition = ({ figures, positions }) => {
               <Typography variant="body1">Transition info</Typography>
             </CardContent>
           </Card>
-        </div>
+        </div> */}
       </div>
     </>
   );

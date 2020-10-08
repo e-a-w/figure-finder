@@ -62,8 +62,8 @@ const Navigation = () => {
         return <PoolSharpIcon />;
       case "All Positions":
         return <PoolSharpIcon />;
-      case "All Transitions":
-        return <PoolSharpIcon />;
+      // case "All Transitions":
+      //   return <PoolSharpIcon />;
       default:
         return null;
     }
@@ -84,7 +84,7 @@ const Navigation = () => {
             { text: "Search", link: "/search" },
             { text: "All Figures", link: "/figures" },
             { text: "All Positions", link: "/positions" },
-            { text: "All Transitions", link: "/transitions" },
+            // { text: "All Transitions", link: "/transitions" },
           ].map((el) => (
             <ListItem component={Link} to={el.link} button key={el.text}>
               <ListItemIcon>{iconList(el.text)}</ListItemIcon>

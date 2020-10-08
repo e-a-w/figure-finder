@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { AppContext } from "../context/AppContext";
 import { InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
+import { gql, useLazyQuery } from "@apollo/client";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -46,21 +49,56 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SearchBox = () => {
+  const history = useHistory();
   const classes = useStyles();
+  const { searchTerm, setSearchTerm, setResults, results } = useContext(
+    AppContext
+  );
+
+  const SEARCH_FIGURES = gql`
+    query($name: String!) {
+      filterFigures(name: $name) {
+        id
+        name
+        number
+        difficulty
+        description
+      }
+    }
+  `;
+
+  const [getSearch, { data, loading, error }] = useLazyQuery(SEARCH_FIGURES);
+
+  useEffect(() => {
+    setResults(data?.filterFigures);
+  }, [data, results]);
+
+  if (loading) return <p>LOADING</p>;
+  if (error) return <p>ERROR</p>;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    getSearch({ variables: { name: searchTerm } });
+    history.push("/search");
+  };
+
   return (
     <>
       <div className={classes.search}>
         <div className={classes.searchIcon}>
           <SearchIcon />
         </div>
-        <InputBase
-          placeholder="Search…"
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput,
-          }}
-          inputProps={{ "aria-label": "search" }}
-        />
+        <form onSubmit={handleSubmit}>
+          <InputBase
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search…"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            inputProps={{ "aria-label": "search" }}
+          />
+        </form>
       </div>
     </>
   );
