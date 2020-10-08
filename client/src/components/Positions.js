@@ -25,7 +25,7 @@ const Positions = ({ isAll }) => {
 
   const { data, loading, error } = useQuery(GET_POSITIONS);
 
-  if (loading) return <CircularProgress color="secondary" />;
+  if (loading) return <CircularProgress />;
   if (error) return <p>ERROR</p>;
   if (!data) return <p>Not found</p>;
 

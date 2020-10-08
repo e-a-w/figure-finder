@@ -14,10 +14,9 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import MenuIcon from "@material-ui/icons/Menu";
-import SearchIcon from "@material-ui/icons/Search";
 import PoolSharpIcon from "@material-ui/icons/PoolSharp";
 import HomeSharpIcon from "@material-ui/icons/HomeSharp";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navigation = () => {
+  const history = useHistory();
   const classes = useStyles();
 
   // Materials UI Library to handle Drawer
@@ -56,14 +56,10 @@ const Navigation = () => {
     switch (text) {
       case "Home":
         return <HomeSharpIcon />;
-      // case "Search":
-      //   return <SearchIcon />;
       case "All Figures":
         return <PoolSharpIcon />;
       case "All Positions":
         return <PoolSharpIcon />;
-      // case "All Transitions":
-      //   return <PoolSharpIcon />;
       default:
         return null;
     }
@@ -81,10 +77,8 @@ const Navigation = () => {
         <List>
           {[
             { text: "Home", link: "/" },
-            // { text: "Search", link: "/search" },
             { text: "All Figures", link: "/figures" },
             { text: "All Positions", link: "/positions" },
-            // { text: "All Transitions", link: "/transitions" },
           ].map((el) => (
             <ListItem component={Link} to={el.link} button key={el.text}>
               <ListItemIcon>{iconList(el.text)}</ListItemIcon>
@@ -107,6 +101,14 @@ const Navigation = () => {
             onClick={toggleDrawer(anchor, true)}
           >
             <MenuIcon />
+          </IconButton>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            onClick={() => history.push("/")}
+          >
+            <HomeSharpIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             Figure Finder

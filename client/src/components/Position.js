@@ -28,7 +28,7 @@ const Position = ({ positionId }) => {
     variables: { id: positionId },
   });
 
-  if (loading) return <CircularProgress color="secondary" />;
+  if (loading) return <CircularProgress />;
   if (error) return <p>{error.toString()}</p>;
   if (!data) return <p>Not found</p>;
 
@@ -36,6 +36,9 @@ const Position = ({ positionId }) => {
     <>
       {data.position && (
         <>
+          <Typography variant="h3" style={{ padding: "20px" }}>
+            Position: {data.position.name}
+          </Typography>
           <Card elevation={3} style={{ margin: "20px auto" }}>
             <CardContent>
               <Typography variant="h5" gutterBottom>

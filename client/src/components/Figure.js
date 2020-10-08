@@ -37,7 +37,7 @@ const Figure = ({ figureId }) => {
     setFigure(data?.figure);
   }, [data]);
 
-  if (loading) return <CircularProgress color="secondary" />;
+  if (loading) return <CircularProgress />;
   if (error) return <p>ERROR</p>;
   if (!data) return <p>Not found</p>;
 
@@ -45,6 +45,9 @@ const Figure = ({ figureId }) => {
     <>
       {figure && (
         <>
+          <Typography variant="h3" style={{ padding: "20px" }}>
+            Figure: {figure.name}
+          </Typography>
           <Card key={figure.id} elevation={3} style={{ margin: "20px auto" }}>
             <CardContent>
               <div style={{ display: "flex", justifyContent: "space-between" }}>

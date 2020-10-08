@@ -8,9 +8,12 @@ const PositionPage = ({ match }) => {
 
   return (
     <>
-      <Typography variant="h2" style={{ padding: "20px" }}>
-        {id ? "Position: " : "All Positions: "}
-      </Typography>
+      {!id && (
+        <Typography variant="h3" style={{ padding: "20px" }}>
+          All Positions:
+        </Typography>
+      )}
+
       {id ? <Position positionId={id} /> : <Positions />}
     </>
   );

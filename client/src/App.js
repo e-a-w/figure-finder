@@ -31,6 +31,9 @@ function App() {
               <Route exact path="/positions/:id" component={PositionPage} />
               <Route exact path="/transitions" component={TransitionPage} />
               <Route exact path="/search" component={SearchPage} />
+              <Route path="/">
+                <h1>Sorry, that page doesn't exist!</h1>
+              </Route>
             </Switch>
           </div>
         </Router>

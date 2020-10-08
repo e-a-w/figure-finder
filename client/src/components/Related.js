@@ -49,7 +49,7 @@ const RelatedPositionTransition = ({ figures, positions }) => {
                   <CardContent>
                     <Typography
                       component={Link}
-                      href={`/figures/${data.id}`}
+                      href={`/${figures ? "figures" : "positions"}/${data.id}`}
                       variant="h5"
                       gutterBottom
                     >

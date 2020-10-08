@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext";
-import { TextField, Button, CircularProgress } from "@material-ui/core";
+import { TextField, IconButton, CircularProgress } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 import { gql, useLazyQuery } from "@apollo/client";
 import Results from "./Results";
 
@@ -27,7 +28,7 @@ const HomeSearchBox = () => {
     setResults(data?.filterFigures);
   }, [data, results]);
 
-  if (loading) return <CircularProgress color="secondary" />;
+  if (loading) return <CircularProgress />;
   if (error) return <p>ERROR</p>;
 
   return (
@@ -50,17 +51,19 @@ const HomeSearchBox = () => {
             style={{
               background: "white",
               width: "100%",
+              height: "50px",
               margin: "20px auto",
             }}
           />
-          <Button
+          <IconButton
             type="submit"
             color="primary"
             variant="contained"
             style={{ marginLeft: "10px" }}
+            aria-label="search"
           >
-            Search
-          </Button>
+            <SearchIcon />
+          </IconButton>
         </form>
       </div>
       <div>

@@ -7,7 +7,7 @@ const SearchPage = () => {
 
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>Search</h1>
+      <h1 style={{ textAlign: "center" }}>Search Results</h1>
       <div>
         <Results figures={searchResults} />
       </div>

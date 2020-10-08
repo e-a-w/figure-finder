@@ -11,12 +11,14 @@ const FormattedFigure = ({ figure }) => {
   const formatPositions = (obj) => {
     let displayedDescription = obj.description;
     if (!obj.positions) {
-      return <CircularProgress color="secondary" />;
+      return <CircularProgress />;
     }
     for (let i = 0; i < obj.positions.length; i++) {
+      let name = obj.positions[i].name;
+      name = new RegExp(`(${name} Position)`);
       displayedDescription = reactStringReplace(
         displayedDescription,
-        obj.positions[i].name,
+        name,
         (match) => (
           <MaterialLink
             key={Math.random()}

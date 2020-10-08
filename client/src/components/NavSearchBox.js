@@ -73,7 +73,7 @@ const SearchBox = () => {
     setResults(data?.filterFigures);
   }, [data, results]);
 
-  if (loading) return <CircularProgress color="secondary" />;
+  if (loading) return <CircularProgress />;
   if (error) return <p>ERROR</p>;
 
   const handleSubmit = (e) => {
