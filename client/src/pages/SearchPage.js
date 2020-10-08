@@ -6,10 +6,12 @@ const SearchPage = () => {
   const { searchResults } = useContext(AppContext);
 
   return (
-    <div>
-      <h1>Search</h1>
-      <Results figures={searchResults} />
-    </div>
+    <>
+      <h1 style={{ textAlign: "center" }}>Search</h1>
+      <div>
+        <Results figures={searchResults} />
+      </div>
+    </>
   );
 };
 

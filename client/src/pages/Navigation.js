@@ -56,8 +56,8 @@ const Navigation = () => {
     switch (text) {
       case "Home":
         return <HomeSharpIcon />;
-      case "Search":
-        return <SearchIcon />;
+      // case "Search":
+      //   return <SearchIcon />;
       case "All Figures":
         return <PoolSharpIcon />;
       case "All Positions":
@@ -81,7 +81,7 @@ const Navigation = () => {
         <List>
           {[
             { text: "Home", link: "/" },
-            { text: "Search", link: "/search" },
+            // { text: "Search", link: "/search" },
             { text: "All Figures", link: "/figures" },
             { text: "All Positions", link: "/positions" },
             // { text: "All Transitions", link: "/transitions" },

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, CircularProgress } from "@material-ui/core";
 import { gql, useLazyQuery } from "@apollo/client";
 import Results from "./Results";
 
@@ -27,7 +27,7 @@ const HomeSearchBox = () => {
     setResults(data?.filterFigures);
   }, [data, results]);
 
-  if (loading) return <p>LOADING</p>;
+  if (loading) return <CircularProgress color="secondary" />;
   if (error) return <p>ERROR</p>;
 
   return (

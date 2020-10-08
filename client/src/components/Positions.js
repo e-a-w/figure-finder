@@ -1,6 +1,12 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import { Card, CardContent, Typography, Link } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Link,
+  CircularProgress,
+} from "@material-ui/core";
 
 const Positions = ({ isAll }) => {
   const GET_POSITIONS = gql`
@@ -19,7 +25,7 @@ const Positions = ({ isAll }) => {
 
   const { data, loading, error } = useQuery(GET_POSITIONS);
 
-  if (loading) return <p>LOADING</p>;
+  if (loading) return <CircularProgress color="secondary" />;
   if (error) return <p>ERROR</p>;
   if (!data) return <p>Not found</p>;
 

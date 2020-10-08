@@ -1,13 +1,17 @@
 import React from "react";
 import reactStringReplace from "react-string-replace";
 import { Link } from "react-router-dom";
-import { Typography, Link as MaterialLink } from "@material-ui/core";
+import {
+  Typography,
+  CircularProgress,
+  Link as MaterialLink,
+} from "@material-ui/core";
 
 const FormattedFigure = ({ figure }) => {
   const formatPositions = (obj) => {
     let displayedDescription = obj.description;
     if (!obj.positions) {
-      return "Loading";
+      return <CircularProgress color="secondary" />;
     }
     for (let i = 0; i < obj.positions.length; i++) {
       displayedDescription = reactStringReplace(

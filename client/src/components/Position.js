@@ -1,7 +1,12 @@
 import React from "react";
 import Related from "./Related";
 import { gql, useQuery } from "@apollo/client";
-import { Card, CardContent, Typography } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  Typography,
+  CircularProgress,
+} from "@material-ui/core";
 
 const Position = ({ positionId }) => {
   const GET_POSITION = gql`
@@ -23,7 +28,7 @@ const Position = ({ positionId }) => {
     variables: { id: positionId },
   });
 
-  if (loading) return <p>LOADING</p>;
+  if (loading) return <CircularProgress color="secondary" />;
   if (error) return <p>{error.toString()}</p>;
   if (!data) return <p>Not found</p>;
 

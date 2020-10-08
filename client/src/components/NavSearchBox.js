@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext";
-import { InputBase } from "@material-ui/core";
+import { InputBase, CircularProgress } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import { gql, useLazyQuery } from "@apollo/client";
@@ -73,7 +73,7 @@ const SearchBox = () => {
     setResults(data?.filterFigures);
   }, [data, results]);
 
-  if (loading) return <p>LOADING</p>;
+  if (loading) return <CircularProgress color="secondary" />;
   if (error) return <p>ERROR</p>;
 
   const handleSubmit = (e) => {

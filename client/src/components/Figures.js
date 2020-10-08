@@ -1,5 +1,6 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
+import { CircularProgress } from "@material-ui/core";
 import Results from "./Results";
 
 const Figures = () => {
@@ -21,7 +22,7 @@ const Figures = () => {
 
   const { data, loading, error } = useQuery(GET_FIGURES);
 
-  if (loading) return <p>LOADING</p>;
+  if (loading) return <CircularProgress color="secondary" />;
   if (error) return <p>ERROR</p>;
   if (!data) return <p>Not found</p>;
 

@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import Related from "./Related";
 import FormattedFigure from "./FormattedFigure";
 import { gql, useQuery } from "@apollo/client";
-import { Card, CardContent, Typography } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  Typography,
+  CircularProgress,
+} from "@material-ui/core";
 
 const Figure = ({ figureId }) => {
   const [figure, setFigure] = useState({});
@@ -32,7 +37,7 @@ const Figure = ({ figureId }) => {
     setFigure(data?.figure);
   }, [data]);
 
-  if (loading) return <p>LOADING</p>;
+  if (loading) return <CircularProgress color="secondary" />;
   if (error) return <p>ERROR</p>;
   if (!data) return <p>Not found</p>;
 
