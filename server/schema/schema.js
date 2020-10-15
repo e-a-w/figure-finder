@@ -1,4 +1,3 @@
-const { ResultStorage } = require("firebase-functions/lib/providers/testLab");
 const graphql = require("graphql");
 const Figure = require("../db/models/figure");
 const Position = require("../db/models/position");
