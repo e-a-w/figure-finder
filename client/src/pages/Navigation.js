@@ -16,6 +16,7 @@ import clsx from "clsx";
 import MenuIcon from "@material-ui/icons/Menu";
 import PoolSharpIcon from "@material-ui/icons/PoolSharp";
 import HomeSharpIcon from "@material-ui/icons/HomeSharp";
+import InfoSharpIcon from "@material-ui/icons/InfoSharp";
 import { Link, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -60,6 +61,8 @@ const Navigation = () => {
         return <PoolSharpIcon />;
       case "All Positions":
         return <PoolSharpIcon />;
+      case "About":
+        return <InfoSharpIcon />;
       default:
         return null;
     }
@@ -77,6 +80,7 @@ const Navigation = () => {
         <List>
           {[
             { text: "Home", link: "/" },
+            { text: "About", link: "/about" },
             { text: "All Figures", link: "/figures" },
             { text: "All Positions", link: "/positions" },
           ].map((el) => (

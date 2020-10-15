@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import FigurePage from "./pages/FigurePage";
 import Navigation from "./pages/Navigation";
 import SearchPage from "./pages/SearchPage";
+import About from "./pages/About";
 import TransitionPage from "./pages/TransitionPage";
 import PositionPage from "./pages/PositionPage";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
@@ -36,6 +37,7 @@ function App() {
               <Route exact path="/positions/:id" component={PositionPage} />
               <Route exact path="/transitions" component={TransitionPage} />
               <Route exact path="/search" component={SearchPage} />
+              <Route exact path="/about" component={About} />
               <Route path="/">
                 <h1>Sorry, that page doesn't exist!</h1>
               </Route>
