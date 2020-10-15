@@ -10,8 +10,13 @@ import TransitionPage from "./pages/TransitionPage";
 import PositionPage from "./pages/PositionPage";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
+const appURL =
+  process.env.NODE_ENV === "production"
+    ? "https://figure-finder.herokuapp.com/"
+    : "http://localhost:8080/graphql";
+
 const client = new ApolloClient({
-  uri: "http://localhost:8080/graphql",
+  uri: appURL,
   cache: new InMemoryCache(),
 });
 
