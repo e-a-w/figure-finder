@@ -1,5 +1,6 @@
 {
   "name": "figure-finder",
+  "license": "MIT",
   "version": "0.1.0",
   "main": "index.js",
   "dependencies": {
