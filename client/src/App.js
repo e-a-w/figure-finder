@@ -12,7 +12,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 const appURL =
   process.env.NODE_ENV === "production"
-    ? "https://figure-finder.herokuapp.com/"
+    ? "https://figure-finder.herokuapp.com/graphql"
     : "http://localhost:8080/graphql";
 
 const client = new ApolloClient({
